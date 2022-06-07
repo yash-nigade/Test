@@ -1,0 +1,225 @@
+
+<!DOCTYPEhtml>
+<htmllang="en">
+  <head>
+    <metacharset="UTF-8"/>
+    <metaname="viewport"content="width=device-width, initial-scale=1.0"/>
+    <title>Validation</title>
+    <linkrel="stylesheet"href="style.css"/>
+    <linkrel="preconnect"href="https://fonts.gstatic.com"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <divclass="contact-banner">
+      <h1>Vishwakarma Institute Of Technology , Pune</h1>
+  
+      <pclass="contact-description">
+        We'd really love to hear from you! Please fill in the form below and
+        submit
+      </p>
+    </div>
+
+    <formname="contact-form">
+      <divclass="form-control">
+        <label>Full Name</label>
+        <inputname="name"
+          placeholder="First and Last Name"/>
+        <divclass="error hide">Name is required</div>
+      </div>
+
+      <divclass="form-control">
+        <label>Email</label>
+        <input
+          name="email"
+          placeholder="e.g. your_email@example.com"
+        />
+        <divclass="error hide">Email is invalid</div>
+      </div>
+
+      <divclass="form-control">
+        <label>Phone</label>
+        <inputname="phone"
+        ></input>
+        <divclass="error hide">Phone is invalid</div>
+      </div>
+
+      <divclass="form-control">
+        <label>Message</label>
+        <textareaname="message"></textarea>
+        <divclass="error hide">Message is required</div>
+      </div>
+
+      <hr/>
+
+      <buttontype="submit">SUBMIT FORM</button>
+    </form>
+
+    <scriptsrc="script.js"></script>
+  </body>
+</html> 
+body {
+    font-family: "Lato", sans-serif;
+    color: black;
+    margin: 0;
+  }
+  
+  .contact-banner {
+    background-image: linear-gradient(
+      to right,
+      rgb(22, 158, 199) 0%,
+      rgb(13, 210, 228) 100%
+    );
+    color: white;
+    padding: 40px;
+  }
+  
+  .invalid {
+    border: 1pxsolidred;
+  }
+  
+  .mb-2 {
+    margin-bottom: 20px;
+  }
+  
+  .mb-4 {
+    margin-bottom: 40px;
+  }
+  
+  p {
+    font-size: 20px;
+  }
+  
+  .contact-description {
+    margin-bottom: 40px;
+  }
+  
+  input {
+    padding: 10px;
+    border-radius: 5px;
+    width: 280px;
+    border: 1pxsolidrgb(0, 114, 66);
+    font-size: 18px;
+    outline: none;
+    color: #333;
+  }
+  
+  .form-control {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 6px;
+  }
+  
+  label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .hide {
+    opacity: 0;
+  }
+  
+  textarea {
+    width: 560px;
+    border-radius: 5px;
+    outline: none;
+    padding: 10px;
+    height: 200px;
+    font-size: 18px;
+  }
+  
+  button {
+    color: black;
+    padding: 20px;
+    border: 1pxsolidrgb(77, 140, 192);
+    border-radius: 10px;
+    background: none;
+    cursor: pointer;
+    transition: all0.5s;
+    color: rgb(0, 114, 66);
+  }
+  
+  button:hover {
+    background-image: linear-gradient(
+      to right,
+      rgb(0, 114, 66) 0%,
+      rgb(4, 109, 91) 100%
+    );
+    color: white;
+  }
+  
+  form {
+    padding: 40px;
+  }
+  
+  hr {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    height: 1px;
+    border: none;
+    background-color: rgb(0, 114, 66);
+  }
+
+Script.js
+constform = document.querySelector("form[name='contact-form']");
+constnameInput = document.querySelector("input[name='name']");
+constemailInput = document.querySelector("input[name='email']");
+constphoneInput = document.querySelector("input[name='phone']");
+constmessageInput = document.querySelector("textarea[name='message']");
+
+nameInput.isValid = () => !!nameInput.value;
+emailInput.isValid = () =>isValidEmail(emailInput.value);
+phoneInput.isValid = () =>isValidPhone(phoneInput.value);
+messageInput.isValid = () => !!messageInput.value;
+
+constinputFields = [nameInput, emailInput, phoneInput, messageInput];
+
+constisValidEmail = (email) => {
+  constre = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  returnre.test(String(email).toLowerCase());
+};
+
+constisValidPhone = (phone) => {
+  constre = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+  returnre.test(String(phone).toLowerCase());
+};
+
+letshouldValidate = false;
+letisFormValid = false;
+
+constvalidateInputs = () => {
+  console.log("we are here");
+  if (!shouldValidate) return;
+
+  isFormValid = true;
+  inputFields.forEach((input) => {
+    input.classList.remove("invalid");
+    input.nextElementSibling.classList.add("hide");
+
+    if (!input.isValid()) {
+      input.classList.add("invalid");
+      isFormValid = false;
+      input.nextElementSibling.classList.remove("hide");
+    }
+  });
+};
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  shouldValidate = true;
+  validateInputs();
+  if (isFormValid) {
+    // TODO: DO AJAX REQUEST
+  }
+});
+
+inputFields.forEach((input) =>input.addEventListener("input", validateInputs));
